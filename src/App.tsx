@@ -121,15 +121,15 @@ export default function PortfolioLandingPage() {
           {/* Portfolio Section */}
           {activeTab === 'portfolio' && (
             <motion.section key="portfolio" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16">
-              <h2 className="text-3xl font-bold text-center mb-6">My Portfolio</h2>
+              <h2 className="text-3xl font-bold text-center mb-6">My Projects</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-md">
                   <p className="font-semibold text-[#3B0060] dark:text-[#91D4FC]">Project 1</p>
-                  <p className="text-gray-600 dark:text-gray-300">Description of project.</p>
+                  <p className="text-gray-600 dark:text-gray-300">Working on it😅</p>
                 </div>
                 <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-md">
                   <p className="font-semibold text-[#3B0060] dark:text-[#91D4FC]">Project 2</p>
-                  <p className="text-gray-600 dark:text-gray-300">Description of project.</p>
+                  <p className="text-gray-600 dark:text-gray-300">Working on it😅</p>
                 </div>
               </div>
               <div className="mt-10 text-center">
@@ -147,9 +147,22 @@ export default function PortfolioLandingPage() {
           )}
 
           {/* Contact Section */}
+             
           {activeTab === 'contact' && (
             <motion.section key="contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16">
               <h2 className="text-3xl font-bold text-center mb-6">Contact Me</h2>
+
+           <div className="flex justify-center gap-4 mb-8">
+  <a href="https://github.com/ProthaGOAT" target="_blank" aria-label="GitHub">
+    <Github className="h-6 w-6 text-[#3B0060] hover:text-[#2a004d] dark:text-[#6434c9] dark:hover:text-[#91D4FC] transition duration-700" />
+  </a>
+  <a href="mailto:abrahamogbole6@gmail.com" aria-label="Email">
+    <Mail className="h-6 w-6 text-[#3B0060] hover:text-[#2a004d] dark:text-[#6434c9] dark:hover:text-[#91D4FC] transition duration-700" />
+  </a>
+  <a href="https://www.linkedin.com/in/abraham-ogbole-0bb056329" target="_blank" aria-label="LinkedIn">
+    <Linkedin className="h-6 w-6 text-[#3B0060] hover:text-[#2a004d] dark:text-[#6434c9] dark:hover:text-[#91D4FC] transition duration-700" />
+  </a>
+</div>
               <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto space-y-4">
                 <input name="name" value={formData.name} onChange={handleInputChange} required placeholder="Your Name" className="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white" />
                 <input name="email" type="email" value={formData.email} onChange={handleInputChange} required placeholder="Your Email" className="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white" />
@@ -163,12 +176,7 @@ export default function PortfolioLandingPage() {
 
           {/* Footer */}
           <footer className="fixed bottom-0 left-0 w-full py-3 text-center text-sm bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 z-20">
-            Made with Tailwind CSS and React by Pro Ogbole
-            <div className="mt-1 flex justify-center gap-4">
-              <a href="https://github.com/ProthaGOAT" target="_blank" rel="noopener noreferrer"><Github className="h-5 w-5" /></a>
-              <a href="https://www.linkedin.com/in/abraham-ogbole-0bb056329" target="_blank" rel="noopener noreferrer"><Linkedin className="h-5 w-5" /></a>
-              <a href="mailto:abrahamogbole6@gmail.com"><Mail className="h-5 w-5" /></a>
-            </div>
+            Made with Tailwind CSS and React by Pro Ogbole❤
           </footer>
         </div>
       )}
