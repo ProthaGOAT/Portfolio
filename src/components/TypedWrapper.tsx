@@ -1,28 +1,28 @@
-import { useEffect, useRef } from 'react'
-import Typed from 'typed.js'
+// src/components/TypedWrapper.tsx
 
-interface Props {
+import { useEffect, useRef } from 'react'
+import TypedJS from 'typed.js'
+
+type Props = {
   strings: string[]
   typeSpeed?: number
   backSpeed?: number
   loop?: boolean
-  showCursor?: boolean
+  className?: string
 }
 
-export default function TypedWrapper({ strings, typeSpeed = 50, backSpeed = 30, loop = true, showCursor = true }: Props) {
-  const el = useRef(null)
+export default function Typed({ strings, typeSpeed = 50, backSpeed = 30, loop = false, className = '' }: Props) {
+  const elRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
-    const typed = new Typed(el.current, {
+    const typed = new TypedJS(elRef.current!, {
       strings,
       typeSpeed,
       backSpeed,
       loop,
-      showCursor,
     })
-
     return () => typed.destroy()
-  }, [strings, typeSpeed, backSpeed, loop, showCursor])
+  }, [strings, typeSpeed, backSpeed, loop])
 
-  return <span ref={el} />
+  return <span ref={elRef} className={className} />
 }

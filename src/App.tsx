@@ -1,21 +1,18 @@
-// Updated version with corrected type-only imports and react-typed dependency fix
+// src/App.tsx
 
 import { useState, useEffect } from 'react'
 import type { ChangeEvent, FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Mail, Github, Linkedin } from 'lucide-react'
-
-import TypedWrapper from './components/TypedWrapper'
-
-
-
+import Typed from './components/TypedWrapper' // remember to create this
 
 export default function PortfolioLandingPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+  const [activeTab, setActiveTab] = useState('home')
   const [showIntro, setShowIntro] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowIntro(false), 6000)
+    const timer = setTimeout(() => setShowIntro(false), 7000)
     return () => clearTimeout(timer)
   }, [])
 
@@ -44,64 +41,87 @@ export default function PortfolioLandingPage() {
     }
   }
 
+  const TabButton = (tab: string, label: string) => (
+    <button
+      onClick={() => setActiveTab(tab)}
+      className={`px-4 py-2 border-b-2 ${
+        activeTab === tab
+          ? 'border-[#3B0060] text-[#3B0060] dark:text-[#91D4FC]'
+          : 'border-transparent text-gray-500 dark:text-gray-400'
+      } transition duration-300`}
+    >
+      {label}
+    </button>
+  )
+
   return (
-    <div className="relative bg-gradient-to-b from-white to-[#edf4fb] dark:from-[#0d1a2a] dark:to-[#152c47]">
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#edf4fb] dark:from-[#0d1a2a] dark:to-[#152c47] text-gray-800 dark:text-white overflow-hidden">
       <AnimatePresence mode="wait">
-        {showIntro ? (
+        {showIntro && (
           <motion.div
             key="intro"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 2 } }}
             className="fixed inset-0 z-50 bg-black text-white flex flex-col justify-center items-center text-center px-4"
           >
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-lg md:text-xl">
-              The heights by great men reached and kept,
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="text-xl">
+              Cogito, ergo sum
             </motion.p>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="text-lg md:text-xl">
-              were not attained by sudden flight,
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="text-xl">
+              I think, therefore I am
             </motion.p>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} className="text-lg md:text-xl">
-              but they, while their companions slept,
-            </motion.p>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.5 }} className="text-lg md:text-xl">
-              were toiling upward in the night. — Henry Wadsworth Longfellow
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3 }} className="mt-4 text-sm text-gray-400">
+              — René Descartes
             </motion.p>
           </motion.div>
-        ) : (
-          <motion.div
-            key="main"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="snap-y snap-mandatory h-screen overflow-scroll scroll-smooth"
-          >
-            {/* Hero Section */}
-            <section className="snap-start py-20 px-4 md:px-8 lg:px-16 h-screen flex flex-col justify-center items-center">
-             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-  <TypedWrapper strings={["Pro Ogbole"]} typeSpeed={100} showCursor={false} />
-</h1>
+        )}
+      </AnimatePresence>
 
-              <h2 className="text-2xl text-[#3B0060] dark:text-[#6434c9] mb-4">Full Stack Developer</h2>
-              <p className="text-center text-lg text-[#3A5A7A] dark:text-gray-300 max-w-xl">
-                I'm a 19 year old Website Developer whose passion is to create beautiful and functional websites.
-                When I'm not coding, I do often find myself listening to music or even creating music.
-                I draw, I cook and I write poems and literature.
+      {!showIntro && (
+        <div>
+          {/* Navigation */}
+          <div className="flex justify-center gap-4 py-4 border-b border-gray-300 dark:border-gray-700 bg-white dark:bg-[#101826] sticky top-0 z-30">
+            {TabButton('home', 'Home')}
+            {TabButton('about', 'About Me')}
+            {TabButton('portfolio', 'My Portfolio')}
+            {TabButton('contact', 'Contact Me')}
+          </div>
+
+          {/* Home Section */}
+          {activeTab === 'home' && (
+            <motion.section key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col items-center justify-center text-center py-20 px-4">
+              <img src="/avatar.png" alt="Pro Ogbole" className="w-32 h-32 rounded-full border-4 border-[#91D4FC] shadow-lg mb-6" />
+              <h1 className="text-4xl md:text-6xl font-bold mb-4">Hi, I'm Pro Ogbole</h1>
+              <Typed
+                strings={[
+                  "I'm a full‑stack developer",
+                  "I build digital experiences",
+                  "I design and code",
+                  "I bring your Website dreams to life.",
+                  "I am Pro Ogbole. This is what I do",
+                ]}
+                typeSpeed={70}
+                backSpeed={50}
+                loop
+                className="text-xl text-[#3B0060] dark:text-[#91D4FC] mt-2"
+              />
+            </motion.section>
+          )}
+
+          {/* About Section */}
+          {activeTab === 'about' && (
+            <motion.section key="about" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16 flex flex-col items-center text-center">
+              <h2 className="text-3xl font-bold mb-4">About Me</h2>
+              <p className="max-w-2xl text-lg text-gray-700 dark:text-gray-300">
+               I'm Abraham Ogbole, a Web Developer with a background in Information Technology. I'm currently focused on building and improving my skills in front-end and back-end development, while also learning best practices for responsive design, performance, and security. My IT foundation helps me approach coding with a problem-solving mindset and a passion for creating clean, user-friendly websites and applications. I’m always eager to learn more, grow as a developer, and connect with others in the tech community to share knowledge and build meaningful projects. I'm a 19‑year‑old who when I'm not coding, I create music, draw, cook, and write poetry and literature. Always eager to help with anything web‑development related. Contact me for all web related jobs .
               </p>
-            </section>
+            </motion.section>
+          )}
 
-            {/* About Me */}
-            <section className="snap-start py-20 px-4 md:px-8 lg:px-16 h-screen flex flex-col justify-center items-center bg-[#f5faff] dark:bg-[#112c50]">
-              <h2 className="text-3xl font-bold text-[#3B0060] dark:text-[#91D4FC] mb-4">About Me</h2>
-              <p className="text-lg text-center text-gray-700 dark:text-gray-300 max-w-2xl">
-                I'm a curious and passionate developer with experience building digital tools for the modern web.
-                I believe in building clean, performant, and accessible websites.
-              </p>
-            </section>
-
-            {/* Portfolio */}
-            <section className="snap-start py-20 px-4 md:px-8 lg:px-16 h-screen bg-[#eef4f9] dark:bg-[#0f1d33] flex flex-col items-center">
-              <h2 className="text-3xl font-bold text-[#3B0060] dark:text-[#91D4FC] mb-6">My Portfolio</h2>
-              <p className="text-lg text-center text-gray-600 dark:text-gray-300 mb-8">Here are some of the projects I've worked on:</p>
+          {/* Portfolio Section */}
+          {activeTab === 'portfolio' && (
+            <motion.section key="portfolio" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16">
+              <h2 className="text-3xl font-bold text-center mb-6">My Portfolio</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-md">
                   <p className="font-semibold text-[#3B0060] dark:text-[#91D4FC]">Project 1</p>
@@ -112,12 +132,25 @@ export default function PortfolioLandingPage() {
                   <p className="text-gray-600 dark:text-gray-300">Description of project.</p>
                 </div>
               </div>
-            </section>
+              <div className="mt-10 text-center">
+                <h3 className="text-xl font-semibold mb-4">Technologies I Use</h3>
+                <div className="flex flex-wrap justify-center gap-6">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" className="h-10" />
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" className="h-10" />
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" className="h-10" />
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" className="h-10" />
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" className="h-10" />
+                 
+                </div>
+              </div>
+            </motion.section>
+          )}
 
-            {/* Contact Me */}
-            <section id="contact" className="snap-start py-20 px-4 md:px-8 lg:px-16 h-screen bg-white dark:bg-gray-900 flex flex-col justify-center items-center">
-              <h2 className="text-3xl font-bold text-[#3B0060] dark:text-[#91D4FC] mb-6">Contact Me</h2>
-              <form onSubmit={handleSubmit} className="w-full max-w-lg space-y-4">
+          {/* Contact Section */}
+          {activeTab === 'contact' && (
+            <motion.section key="contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16">
+              <h2 className="text-3xl font-bold text-center mb-6">Contact Me</h2>
+              <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto space-y-4">
                 <input name="name" value={formData.name} onChange={handleInputChange} required placeholder="Your Name" className="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white" />
                 <input name="email" type="email" value={formData.email} onChange={handleInputChange} required placeholder="Your Email" className="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white" />
                 <textarea name="message" value={formData.message} onChange={handleInputChange} required placeholder="Your Message" rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white" />
@@ -125,20 +158,20 @@ export default function PortfolioLandingPage() {
                   Send Message
                 </button>
               </form>
-            </section>
+            </motion.section>
+          )}
 
-            {/* Footer */}
-            <footer className="py-6 text-center text-sm text-gray-500 dark:text-gray-400">
-              Made with Tailwind CSS and React by Pro Ogbole
-              <div className="mt-2 flex justify-center gap-4">
-                <a href="https://github.com/ProthaGOAT" target="_blank"><Github className="h-5 w-5" /></a>
-                <a href="https://www.linkedin.com/in/abraham-ogbole-0bb056329" target="_blank"><Linkedin className="h-5 w-5" /></a>
-                <a href="mailto:abrahamogbole6@gmail.com"><Mail className="h-5 w-5" /></a>
-              </div>
-            </footer>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          {/* Footer */}
+          <footer className="fixed bottom-0 left-0 w-full py-3 text-center text-sm bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 z-20">
+            Made with Tailwind CSS and React by Pro Ogbole
+            <div className="mt-1 flex justify-center gap-4">
+              <a href="https://github.com/ProthaGOAT" target="_blank" rel="noopener noreferrer"><Github className="h-5 w-5" /></a>
+              <a href="https://www.linkedin.com/in/abraham-ogbole-0bb056329" target="_blank" rel="noopener noreferrer"><Linkedin className="h-5 w-5" /></a>
+              <a href="mailto:abrahamogbole6@gmail.com"><Mail className="h-5 w-5" /></a>
+            </div>
+          </footer>
+        </div>
+      )}
     </div>
   )
 }
