@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react'
 import type { ChangeEvent, FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Mail, Github, Linkedin } from 'lucide-react'
-import Typed from './components/TypedWrapper' // remember to create this
+import { Mail, Github, Linkedin, Home, User, Folder, Send } from 'lucide-react'
+import Typed from './components/TypedWrapper'
 
 export default function PortfolioLandingPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -41,21 +41,8 @@ export default function PortfolioLandingPage() {
     }
   }
 
-  const TabButton = (tab: string, label: string) => (
-    <button
-      onClick={() => setActiveTab(tab)}
-      className={`px-4 py-2 border-b-2 ${
-        activeTab === tab
-          ? 'border-[#3B0060] text-[#3B0060] dark:text-[#91D4FC]'
-          : 'border-transparent text-gray-500 dark:text-gray-400'
-      } transition duration-300`}
-    >
-      {label}
-    </button>
-  )
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-[#edf4fb] dark:from-[#0d1a2a] dark:to-[#152c47] text-gray-800 dark:text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#ffffff] via-[#edf4fb] to-[#d6f0ff] dark:from-[#0d1a2a] dark:via-[#101e2e] dark:to-[#152c47] text-gray-800 dark:text-white overflow-hidden relative">
       <AnimatePresence mode="wait">
         {showIntro && (
           <motion.div
@@ -78,13 +65,21 @@ export default function PortfolioLandingPage() {
       </AnimatePresence>
 
       {!showIntro && (
-        <div>
-          {/* Navigation */}
-          <div className="flex justify-center gap-4 py-4 border-b border-gray-300 dark:border-gray-700 bg-white dark:bg-[#101826] sticky top-0 z-30">
-            {TabButton('home', 'Home')}
-            {TabButton('about', 'About Me')}
-            {TabButton('portfolio', 'My Portfolio')}
-            {TabButton('contact', 'Contact Me')}
+        <div className="relative pb-16">
+          {/* Icon Navigation */}
+          <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 md:top-1/2 md:bottom-auto md:left-4 md:transform-none z-50 bg-white dark:bg-[#0d1a2a] rounded-full shadow-lg border border-gray-300 dark:border-gray-700 flex md:flex-col items-center justify-center gap-4 p-4">
+            <button onClick={() => setActiveTab('home')} aria-label="Home" className={`${activeTab === 'home' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
+              <Home className="h-6 w-6" />
+            </button>
+            <button onClick={() => setActiveTab('about')} aria-label="About" className={`${activeTab === 'about' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
+              <User className="h-6 w-6" />
+            </button>
+            <button onClick={() => setActiveTab('portfolio')} aria-label="Portfolio" className={`${activeTab === 'portfolio' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
+              <Folder className="h-6 w-6" />
+            </button>
+            <button onClick={() => setActiveTab('contact')} aria-label="Contact" className={`${activeTab === 'contact' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
+              <Send className="h-6 w-6" />
+            </button>
           </div>
 
           {/* Home Section */}
@@ -100,7 +95,7 @@ export default function PortfolioLandingPage() {
                   "I bring your Website dreams to life.",
                   "I am Pro Ogbole. This is what I do",
                 ]}
-                typeSpeed={70}
+                typeSpeed={40}
                 backSpeed={50}
                 loop
                 className="text-xl text-[#3B0060] dark:text-[#91D4FC] mt-2"
@@ -112,8 +107,8 @@ export default function PortfolioLandingPage() {
           {activeTab === 'about' && (
             <motion.section key="about" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16 flex flex-col items-center text-center">
               <h2 className="text-3xl font-bold mb-4">About Me</h2>
-              <p className="max-w-2xl text-lg text-gray-700 dark:text-gray-300">
-               I'm Abraham Ogbole, a Web Developer with a background in Information Technology. I'm currently focused on building and improving my skills in front-end and back-end development, while also learning best practices for responsive design, performance, and security. My IT foundation helps me approach coding with a problem-solving mindset and a passion for creating clean, user-friendly websites and applications. I’m always eager to learn more, grow as a developer, and connect with others in the tech community to share knowledge and build meaningful projects. I'm a 19‑year‑old who when I'm not coding, I create music, draw, cook, and write poetry and literature. Always eager to help with anything web‑development related. Contact me for all web related jobs .
+              <p className="max-w-2xl text-lg text-gray-700 dark:text-gray-300 rounded-xl">
+               I'm Abraham Ogbole, a Web Developer with a background in Information Technology. I'm currently focused on building and improving my skills in front-end and back-end development, while also learning best practices for responsive design, performance, and security. My IT foundation helps me approach coding with a problem-solving mindset and a passion for creating clean, user-friendly websites and applications. I’m always eager to learn more, grow as a developer, and connect with others in the tech community to share knowledge and build meaningful projects. I'm a 19‑year‑old who when I'm not coding, I create music, draw, cook, and write poetry and literature. Always eager to help with anything web‑development related. Contact me for all web related jobs.
               </p>
             </motion.section>
           )}
@@ -123,11 +118,11 @@ export default function PortfolioLandingPage() {
             <motion.section key="portfolio" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16">
               <h2 className="text-3xl font-bold text-center mb-6">My Projects</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-md">
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
                   <p className="font-semibold text-[#3B0060] dark:text-[#91D4FC]">Project 1</p>
                   <p className="text-gray-600 dark:text-gray-300">Working on it😅</p>
                 </div>
-                <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-md">
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
                   <p className="font-semibold text-[#3B0060] dark:text-[#91D4FC]">Project 2</p>
                   <p className="text-gray-600 dark:text-gray-300">Working on it😅</p>
                 </div>
@@ -140,34 +135,31 @@ export default function PortfolioLandingPage() {
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" className="h-10" />
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" className="h-10" />
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" className="h-10" />
-                 
                 </div>
               </div>
             </motion.section>
           )}
 
           {/* Contact Section */}
-             
           {activeTab === 'contact' && (
             <motion.section key="contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16">
               <h2 className="text-3xl font-bold text-center mb-6">Contact Me</h2>
-
-           <div className="flex justify-center gap-4 mb-8">
-  <a href="https://github.com/ProthaGOAT" target="_blank" aria-label="GitHub">
-    <Github className="h-6 w-6 text-[#3B0060] hover:text-[#2a004d] dark:text-[#6434c9] dark:hover:text-[#91D4FC] transition duration-700" />
-  </a>
-  <a href="mailto:abrahamogbole6@gmail.com" aria-label="Email">
-    <Mail className="h-6 w-6 text-[#3B0060] hover:text-[#2a004d] dark:text-[#6434c9] dark:hover:text-[#91D4FC] transition duration-700" />
-  </a>
-  <a href="https://www.linkedin.com/in/abraham-ogbole-0bb056329" target="_blank" aria-label="LinkedIn">
-    <Linkedin className="h-6 w-6 text-[#3B0060] hover:text-[#2a004d] dark:text-[#6434c9] dark:hover:text-[#91D4FC] transition duration-700" />
-  </a>
-</div>
+              <div className="flex justify-center gap-4 mb-8">
+                <a href="https://github.com/ProthaGOAT" target="_blank" aria-label="GitHub">
+                  <Github className="h-6 w-6 text-[#3B0060] hover:text-[#2a004d] dark:text-[#6434c9] dark:hover:text-[#91D4FC] transition duration-700" />
+                </a>
+                <a href="mailto:abrahamogbole6@gmail.com" aria-label="Email">
+                  <Mail className="h-6 w-6 text-[#3B0060] hover:text-[#2a004d] dark:text-[#6434c9] dark:hover:text-[#91D4FC] transition duration-700" />
+                </a>
+                <a href="https://www.linkedin.com/in/abraham-ogbole-0bb056329" target="_blank" aria-label="LinkedIn">
+                  <Linkedin className="h-6 w-6 text-[#3B0060] hover:text-[#2a004d] dark:text-[#6434c9] dark:hover:text-[#91D4FC] transition duration-700" />
+                </a>
+              </div>
               <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto space-y-4">
-                <input name="name" value={formData.name} onChange={handleInputChange} required placeholder="Your Name" className="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white" />
-                <input name="email" type="email" value={formData.email} onChange={handleInputChange} required placeholder="Your Email" className="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white" />
-                <textarea name="message" value={formData.message} onChange={handleInputChange} required placeholder="Your Message" rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white" />
-                <button type="submit" className="bg-gradient-to-r from-[#3B0060] to-[#6434c9] text-white px-6 py-2 rounded hover:scale-105 transition duration-500">
+                <input name="name" value={formData.name} onChange={handleInputChange} required placeholder="Your Name" className="w-full px-4 py-2 border border-gray-300 rounded-xl dark:bg-gray-800 dark:text-white" />
+                <input name="email" type="email" value={formData.email} onChange={handleInputChange} required placeholder="Your Email" className="w-full px-4 py-2 border border-gray-300 rounded-xl dark:bg-gray-800 dark:text-white" />
+                <textarea name="message" value={formData.message} onChange={handleInputChange} required placeholder="Your Message" rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-xl dark:bg-gray-800 dark:text-white" />
+                <button type="submit" className="bg-gradient-to-r from-[#3B0060] to-[#6434c9] text-white px-6 py-2 rounded-xl hover:scale-105 transition duration-500">
                   Send Message
                 </button>
               </form>
