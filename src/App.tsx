@@ -64,23 +64,7 @@ export default function PortfolioLandingPage() {
         )}
       </AnimatePresence>
 
-      {!showIntro && (
-        <div className="relative pb-32 md:pb-16">
-          {/* Floating Nav */}
-          <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 md:top-1/2 md:bottom-auto md:left-4 md:transform-none z-50 bg-white dark:bg-[#0d1a2a] rounded-full shadow-lg border border-gray-300 dark:border-gray-700 flex md:flex-col items-center justify-center gap-4 p-4">
-            <button onClick={() => setActiveTab('home')} aria-label="Home" className={`${activeTab === 'home' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
-              <Home className="h-6 w-6" />
-            </button>
-            <button onClick={() => setActiveTab('about')} aria-label="About" className={`${activeTab === 'about' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
-              <User className="h-6 w-6" />
-            </button>
-            <button onClick={() => setActiveTab('portfolio')} aria-label="Portfolio" className={`${activeTab === 'portfolio' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
-              <Folder className="h-6 w-6" />
-            </button>
-            <button onClick={() => setActiveTab('contact')} aria-label="Contact" className={`${activeTab === 'contact' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
-              <Send className="h-6 w-6" />
-            </button>
-          </div>
+      
 
           {activeTab === 'home' && (
             <motion.section key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col items-center justify-center text-center py-20 px-4">
@@ -163,6 +147,24 @@ export default function PortfolioLandingPage() {
           )}
         </div>
       )}
+
+{/* Bottom Nav — scrolls with content, sits above footer */}
+<div className="mt-10 flex justify-center">
+  <div className="bg-white dark:bg-[#0d1a2a] rounded-full shadow-md border border-gray-300 dark:border-gray-700 flex gap-6 px-6 py-3">
+    <button onClick={() => setActiveTab('home')} aria-label="Home" className={`${activeTab === 'home' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
+      <Home className="h-6 w-6" />
+    </button>
+    <button onClick={() => setActiveTab('about')} aria-label="About" className={`${activeTab === 'about' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
+      <User className="h-6 w-6" />
+    </button>
+    <button onClick={() => setActiveTab('portfolio')} aria-label="Portfolio" className={`${activeTab === 'portfolio' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
+      <Folder className="h-6 w-6" />
+    </button>
+    <button onClick={() => setActiveTab('contact')} aria-label="Contact" className={`${activeTab === 'contact' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
+      <Send className="h-6 w-6" />
+    </button>
+  </div>
+</div>
 
       <footer className="py-3 text-center text-sm bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 z-20 mt-20">
         Made with Tailwind CSS and React by Pro Ogbole❤
