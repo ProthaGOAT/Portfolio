@@ -52,7 +52,7 @@ export default function PortfolioLandingPage() {
             className="fixed inset-0 z-50 bg-black text-white flex flex-col justify-center items-center text-center px-4"
           >
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="text-xl">
-              Cognito, ergo sum
+              Cogito, ergo sum
             </motion.p>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="text-xl">
               I think, therefore I am
@@ -66,7 +66,7 @@ export default function PortfolioLandingPage() {
 
       {!showIntro && (
         <div className="relative pb-32 md:pb-16">
-          {/* Icon Navigation */}
+          {/* Floating Nav */}
           <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 md:top-1/2 md:bottom-auto md:left-4 md:transform-none z-50 bg-white dark:bg-[#0d1a2a] rounded-full shadow-lg border border-gray-300 dark:border-gray-700 flex md:flex-col items-center justify-center gap-4 p-4">
             <button onClick={() => setActiveTab('home')} aria-label="Home" className={`${activeTab === 'home' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
               <Home className="h-6 w-6" />
@@ -82,7 +82,6 @@ export default function PortfolioLandingPage() {
             </button>
           </div>
 
-          {/* Home Section */}
           {activeTab === 'home' && (
             <motion.section key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col items-center justify-center text-center py-20 px-4">
               <img src="/avatar.png" alt="Pro Ogbole" className="w-32 h-32 rounded-full border-4 border-[#91D4FC] shadow-lg mb-6" />
@@ -103,17 +102,15 @@ export default function PortfolioLandingPage() {
             </motion.section>
           )}
 
-          {/* About Section */}
           {activeTab === 'about' && (
             <motion.section key="about" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16 flex flex-col items-center text-center">
               <h2 className="text-3xl font-bold mb-4">About Me</h2>
               <p className="max-w-2xl text-lg text-gray-700 dark:text-gray-300 rounded-xl">
-               I'm Abraham Ogbole, a Web Developer with a background in Information Technology. I'm currently focused on building and improving my skills in front-end and back-end development, while also learning best practices for responsive design, performance, and security. My IT foundation helps me approach coding with a problem-solving mindset and a passion for creating clean, user-friendly websites and applications. I’m always eager to learn more, grow as a developer, and connect with others in the tech community to share knowledge and build meaningful projects. I'm a 19‑year‑old who when I'm not coding, I create music, draw, cook, and write poetry and literature. Always eager to help with anything web‑development related. Contact me for all web related jobs.
+                I'm Abraham Ogbole, a Web Developer with a background in Information Technology. I'm currently focused on building and improving my skills in front-end and back-end development, while also learning best practices for responsive design, performance, and security. My IT foundation helps me approach coding with a problem-solving mindset and a passion for creating clean, user-friendly websites and applications. I’m always eager to learn more, grow as a developer, and connect with others in the tech community to share knowledge and build meaningful projects. I'm a 19‑year‑old who when I'm not coding, I create music, draw, cook, and write poetry and literature. Always eager to help with anything web‑development related. Contact me for all web related jobs.
               </p>
             </motion.section>
           )}
 
-          {/* Portfolio Section */}
           {activeTab === 'portfolio' && (
             <motion.section key="portfolio" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16">
               <h2 className="text-3xl font-bold text-center mb-6">My Projects</h2>
@@ -140,7 +137,6 @@ export default function PortfolioLandingPage() {
             </motion.section>
           )}
 
-          {/* Contact Section */}
           {activeTab === 'contact' && (
             <motion.section key="contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="py-20 px-4 md:px-8 lg:px-16">
               <h2 className="text-3xl font-bold text-center mb-6">Contact Me</h2>
@@ -165,34 +161,12 @@ export default function PortfolioLandingPage() {
               </form>
             </motion.section>
           )}
+        </div>
+      )}
 
-          {/* Floating Nav (Mobile Bottom, Desktop Side) */}
-<div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 md:top-1/2 md:bottom-auto md:left-4 md:translate-x-0 md:-translate-y-1/2 z-50">
-  <div className="bg-white dark:bg-[#101826] rounded-full shadow-lg flex md:flex-col items-center gap-4 p-4">
-    <button onClick={() => setActiveTab('home')} aria-label="Home">
-      <svg className={`w-6 h-6 ${activeTab === 'home' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} fill="currentColor" viewBox="0 0 20 20">
-        <path d="M10 2L2 9h2v9h4V13h4v5h4V9h2L10 2z" />
-      </svg>
-    </button>
-    <button onClick={() => setActiveTab('about')} aria-label="About">
-      <svg className={`w-6 h-6 ${activeTab === 'about' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
-      </svg>
-    </button>
-    <button onClick={() => setActiveTab('portfolio')} aria-label="Portfolio">
-      <svg className={`w-6 h-6 ${activeTab === 'portfolio' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} fill="currentColor" viewBox="0 0 24 24">
-        <path d="M4 6h16v12H4z" />
-      </svg>
-    </button>
-    <button onClick={() => setActiveTab('contact')} aria-label="Contact">
-      <svg className={`w-6 h-6 ${activeTab === 'contact' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} fill="currentColor" viewBox="0 0 24 24">
-        <path d="M2 4h20v16H2z" />
-      </svg>
-    </button>
-  </div>
-</div>
-
-{/* Footer */}
-<footer className="py-3 text-center text-sm bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 z-20 mt-20">
-  Made with Tailwind CSS and React by Pro Ogbole❤
-</footer>
+      <footer className="py-3 text-center text-sm bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 z-20 mt-20">
+        Made with Tailwind CSS and React by Pro Ogbole❤
+      </footer>
+    </div>
+  )
+}
