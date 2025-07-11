@@ -65,7 +65,7 @@ export default function PortfolioLandingPage() {
       </AnimatePresence>
 
       {!showIntro && (
-        <div className="relative pb-16">
+        <div className="relative pb-32 md:pb-16">
           {/* Icon Navigation */}
           <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 md:top-1/2 md:bottom-auto md:left-4 md:transform-none z-50 bg-white dark:bg-[#0d1a2a] rounded-full shadow-lg border border-gray-300 dark:border-gray-700 flex md:flex-col items-center justify-center gap-4 p-4">
             <button onClick={() => setActiveTab('home')} aria-label="Home" className={`${activeTab === 'home' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
