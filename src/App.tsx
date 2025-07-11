@@ -52,7 +52,7 @@ export default function PortfolioLandingPage() {
             className="fixed inset-0 z-50 bg-black text-white flex flex-col justify-center items-center text-center px-4"
           >
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="text-xl">
-              Cogito, ergo sum
+              Cognito, ergo sum
             </motion.p>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="text-xl">
               I think, therefore I am
