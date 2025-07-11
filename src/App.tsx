@@ -64,8 +64,8 @@ export default function PortfolioLandingPage() {
         )}
       </AnimatePresence>
 
-      
-
+      {!showIntro && (
+        <div className="relative pb-32 md:pb-20">
           {activeTab === 'home' && (
             <motion.section key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col items-center justify-center text-center py-20 px-4">
               <img src="/avatar.png" alt="Pro Ogbole" className="w-32 h-32 rounded-full border-4 border-[#91D4FC] shadow-lg mb-6" />
@@ -145,28 +145,26 @@ export default function PortfolioLandingPage() {
               </form>
             </motion.section>
           )}
+
+          {/* Static Nav before Footer */}
+          <div className="mt-10 flex justify-center gap-6">
+            <button onClick={() => setActiveTab('home')} aria-label="Home">
+              <Home className={`h-6 w-6 ${activeTab === 'home' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} />
+            </button>
+            <button onClick={() => setActiveTab('about')} aria-label="About">
+              <User className={`h-6 w-6 ${activeTab === 'about' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} />
+            </button>
+            <button onClick={() => setActiveTab('portfolio')} aria-label="Portfolio">
+              <Folder className={`h-6 w-6 ${activeTab === 'portfolio' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} />
+            </button>
+            <button onClick={() => setActiveTab('contact')} aria-label="Contact">
+              <Send className={`h-6 w-6 ${activeTab === 'contact' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} />
+            </button>
+          </div>
         </div>
       )}
 
-{/* Bottom Nav — scrolls with content, sits above footer */}
-<div className="mt-10 flex justify-center">
-  <div className="bg-white dark:bg-[#0d1a2a] rounded-full shadow-md border border-gray-300 dark:border-gray-700 flex gap-6 px-6 py-3">
-    <button onClick={() => setActiveTab('home')} aria-label="Home" className={`${activeTab === 'home' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
-      <Home className="h-6 w-6" />
-    </button>
-    <button onClick={() => setActiveTab('about')} aria-label="About" className={`${activeTab === 'about' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
-      <User className="h-6 w-6" />
-    </button>
-    <button onClick={() => setActiveTab('portfolio')} aria-label="Portfolio" className={`${activeTab === 'portfolio' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
-      <Folder className="h-6 w-6" />
-    </button>
-    <button onClick={() => setActiveTab('contact')} aria-label="Contact" className={`${activeTab === 'contact' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'} transition duration-300`}>
-      <Send className="h-6 w-6" />
-    </button>
-  </div>
-</div>
-
-      <footer className="py-3 text-center text-sm bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 z-20 mt-20">
+      <footer className="py-3 text-center text-sm bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 z-20 mt-10">
         Made with Tailwind CSS and React by Pro Ogbole❤
       </footer>
     </div>
