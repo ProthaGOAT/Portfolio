@@ -166,12 +166,33 @@ export default function PortfolioLandingPage() {
             </motion.section>
           )}
 
-          {/* Footer */}
-          <footer className="fixed bottom-0 left-0 w-full py-3 text-center text-sm bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 z-20">
-            Made with Tailwind CSS and React by Pro Ogbole❤
-          </footer>
-        </div>
-      )}
-    </div>
-  )
-}
+          {/* Floating Nav (Mobile Bottom, Desktop Side) */}
+<div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 md:top-1/2 md:bottom-auto md:left-4 md:translate-x-0 md:-translate-y-1/2 z-50">
+  <div className="bg-white dark:bg-[#101826] rounded-full shadow-lg flex md:flex-col items-center gap-4 p-4">
+    <button onClick={() => setActiveTab('home')} aria-label="Home">
+      <svg className={`w-6 h-6 ${activeTab === 'home' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 2L2 9h2v9h4V13h4v5h4V9h2L10 2z" />
+      </svg>
+    </button>
+    <button onClick={() => setActiveTab('about')} aria-label="About">
+      <svg className={`w-6 h-6 ${activeTab === 'about' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+      </svg>
+    </button>
+    <button onClick={() => setActiveTab('portfolio')} aria-label="Portfolio">
+      <svg className={`w-6 h-6 ${activeTab === 'portfolio' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} fill="currentColor" viewBox="0 0 24 24">
+        <path d="M4 6h16v12H4z" />
+      </svg>
+    </button>
+    <button onClick={() => setActiveTab('contact')} aria-label="Contact">
+      <svg className={`w-6 h-6 ${activeTab === 'contact' ? 'text-[#3B0060] dark:text-[#91D4FC]' : 'text-gray-400'}`} fill="currentColor" viewBox="0 0 24 24">
+        <path d="M2 4h20v16H2z" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+{/* Footer */}
+<footer className="py-3 text-center text-sm bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 z-20 mt-20">
+  Made with Tailwind CSS and React by Pro Ogbole❤
+</footer>
